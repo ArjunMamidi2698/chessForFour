@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChessforFour</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic|Material+Icons" />
+    <link rel = "stylesheet"
+    href = "https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <style>
+        body{
+            text-align: center;
+        }
+        table{
+            border: 1px solid goldenrod;
+        }
+        td{
+            border: 1px solid goldenrod;
+            padding: 1rem;
+        }
+        .cross-cell{
+            background-color: aquamarine;
+        }
+        .elephant-cell{
+            background-color: rgb(168, 158, 158);
+        }
+        .knight-cell{
+            background-color: rgba(158, 1, 1, 0.733);
+        }
+        .bishop-cell{
+            background-color: rgba(158, 90, 1, 0.733);
+        }
+        .queen-cell{
+            background-color: rgba(235, 196, 66, 0.856);
+        }
+        .king-cell{
+            background-color: rgb(255, 0, 0);
+        }
+        .sipoy-cell{
+            background-color: brown;
+        }
+    </style>
+</head>
+<body>
+    <div id="ChessforFour-main">
+        <v-app>
+            <v-container>
+                <h1>ChessforFour</h1><br>
+                <v-simple-table>
+                    <template>
+                        <tr v-for="i in 10">
+                            <td v-for="j in 10" :id="i+'-'+j">
+                                <span v-if="(i == 1 && j == 1) || (i == 1 && j == 10) ||
+                                 (i == 2 && j == 2) || (i == 2 && j == 9) || 
+                                 (i == 9 && j == 2) || (i == 9 && j == 9) || 
+                                 (i == 10 && j == 1) || (i == 10 && j == 10)" class="cross-cell">
+                                 cross
+                                </span>
+                                <span v-else-if="(i == 1 && j == 2) || (i == 1 && j == 9) ||
+                                (i == 2 && j == 1) || (i == 2 && j == 10) || 
+                                (i == 9 && j == 1) || (i == 9 && j == 10) || 
+                                (i == 10 && j == 2) || (i == 10 && j == 9)" class="elephant-cell">
+                                Ele
+                               </span>
+                               <span v-else-if="(i == 1 && j == 3) || (i == 1 && j == 8) ||
+                                (i == 3 && j == 1) || (i == 3 && j == 10) || 
+                                (i == 8 && j == 1) || (i == 8 && j == 10) || 
+                                (i == 10 && j == 3) || (i == 10 && j == 8)" class="knight-cell">
+                                knight
+                               </span>
+                               <span v-else-if="(i == 1 && j == 4) || (i == 1 && j == 7) ||
+                                (i == 4 && j == 1) || (i == 4 && j == 10) || 
+                                (i == 7 && j == 1) || (i == 7 && j == 10) || 
+                                (i == 10 && j == 4) || (i == 10 && j == 7)" class="bishop-cell">
+                                bishop
+                               </span>
+                               <span v-else-if="(i == 1 && j == 5) || (i == 5 && j == 1) ||
+                                (i == 5 && j == 10) || (i == 10 && j == 5)" class="queen-cell">
+                                queen
+                               </span>
+                               <span v-else-if="(i == 1 && j == 6) || (i == 6 && j == 1) ||
+                                (i == 6 && j == 10) || (i == 10 && j == 6)" class="king-cell">
+                                king
+                               </span>
+                               <span v-else-if="(i == 2 || i == 9 || j == 2 || j == 9)" class="sipoy-cell">
+                                    Sipoy
+                                </span>
+                                <span v-else>cell</span>
+                            </td>
+                        </tr>
+                    </template>
+                </v-simple-table>
+            </v-container>
+        </v-app>
+    </div>
+    <script type="module">
+        var vm = new Vue({
+            el: '#ChessforFour-main',
+            vuetify: new Vuetify(),
+            data() {
+                return {
+                    testData: 'tested',
+                }
+            },
+            mounted(){
+                for(let i = 1; i <= 10 ; i++){
+                    for(let j = 1; j <= 10 ; j++){
+                        let  ele = document.getElementById(`${i}-${j}`);
+                        if(i == j || i == j-2 || i == j+2 || i == j-4 || i == j+4 || i == j-6 || i == j+6 || i == j-8 || i == j+8){
+                            ele.style.backgroundColor = 'wheat';
+                        } else {
+                            ele.style.backgroundColor = 'gray';
+                        }
+                        // if(i%2 == 0 && j%2 == 0){
+                        //     ele.style.backgroundColor = 'aqua';
+                        // } else if(i%2 == 1 && j%2 == 1){
+                        //     ele.style.backgroundColor = 'yellow';
+                        // }
+                    }
+                }
+            },
+        });
+    </script>
+</body>
+</html>
